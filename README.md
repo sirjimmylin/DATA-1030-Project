@@ -16,7 +16,7 @@ Yes
 
 ## Variables
 
-Category: Patient classification (e.g., Blood Donor, Hepatitis, Fibrosis, Cirrhosis)
+    Category: Patient classification (e.g., Blood Donor, Hepatitis, Fibrosis, Cirrhosis)
     Age: Patient's age in years
     Sex: Patient's gender (m for male, f for female)
     ALB: Albumin, a protein made by the liver
