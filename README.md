@@ -30,11 +30,11 @@ Yes
     GGT: Gamma-Glutamyl Transferase, an enzyme indicative of liver disease
     PROT: Total Protein, measuring overall protein in the blood
 
-    ALB (Albumin): g/dL or g/L
+    ALB (Albumin): g/L
     ALP (Alkaline Phosphatase): U/L (Units per Liter)
     ALT (Alanine Aminotransferase): U/L (Units per Liter)
     AST (Aspartate Aminotransferase): U/L (Units per Liter)
-    BIL (Bilirubin): mg/dL or μmol/L
+    BIL (Bilirubin): μmol/L
     CHE (Cholinesterase): U/L (Units per Liter)
     CHOL (Cholesterol): mg/dL or mmol/L
     CREA (Creatinine): mg/dL or μmol/L
