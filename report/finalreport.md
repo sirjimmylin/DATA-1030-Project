@@ -1,17 +1,17 @@
 # Blood Donor Classification Project Report
 
-## Introduction (5 points)
+## Introduction 
 
 ### Motivation
 Blood donor classification is crucial for healthcare systems to ensure the safety and efficiency of blood donation processes. Accurate classification models can help identify suitable donors and optimize resource allocation.
 
 ### Dataset Description
-The dataset includes features such as Age, ALB, AST, and others, with the target variable being Category, which classifies individuals into groups like "0=Blood Donor" and "1=Hepatitis". The dataset consists of [number] samples and [number] features.
+The dataset includes features such as Age, ALB, AST, and others, with the target variable being Category, which classifies individuals into groups like "0=Blood Donor" and "1=Hepatitis". The dataset consists of 615 samples and 12 features.
 
 ### Previous Work
 Previous studies have applied machine learning models to similar datasets, achieving F2 scores around 0.85 with Support Vector Classifiers. Our model aims to achieve similar predictive power.
 
-## Exploratory Data Analysis (EDA) (5 points)
+## Exploratory Data Analysis (EDA) 
 
 ### Target Variable Distribution
 - Visualize the distribution of the target variable (`Category`).
