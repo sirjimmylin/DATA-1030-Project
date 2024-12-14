@@ -66,14 +66,29 @@ For this model, I have chosen to optimize for false negatives, since I have deci
 
 ### Hyperparameter Tuning
 
-| Model                                     | Hyperparameter | Values       |
-|-------------------------------------------|----------------|--------------|
-| Reduced Features with SVC                 | Subset 1       | 0.8454       |  
-| Reduced Features with Logistic Regression | Subset 1       | 0.6734       |  
-| XGBoost                                   | Full Set       | 0.5502       |
-| Random Forest Classifier                  |                |              |
+| Machine Learning Model | Hyperparameter | Values |
+|------------------------|----------------|--------|
+| Reduced Features with SVC | C | 0.1, 1, 10 |
+| | gamma | scale, auto |
+| | kernel | linear |
+| Reduced Features with Logistic Regression | C | 0.01, 1, 100 |
+| | solver | liblinear, saga |
+| | max_iter | 100000 |
+| | class_weight | balanced |
+| | penalty | l1, l2 |
+| | tol | 0.0001, 0.001 |
+| XGBoost | max_depth | 3, 5, 7 |
+| | n_estimators | 100, 200 |
+| | learning_rate | 0.01, 0.1 |
+| | subsample | 0.8, 1.0 |
+| | colsample_bytree | 0.8, 1.0 |
+| Random Forest Classifier | n_estimators | 100, 200 |
+| | max_depth | None, 10 |
+| | min_samples_split | 2, 5 |
+| | min_samples_leaf | 1, 2 |
+| | max_features | sqrt, log2 |
 
-
+#### Table 1: ML Models and their Corresponding Hyperparameters
 
 ### Uncertainty Measurement
 Uncertainties due to data splitting can be measured by running different random states over the dataset during preprocessing and over the different ML models. 
@@ -85,8 +100,7 @@ In both cases, the evaluation metric (i.e. $f_2$ weighted) will vary between ran
 ## Results 
 
 ### Baseline Comparison
-- Report baseline scores (e.g., majority class F2 score).
-- Compare your models' performance against this baseline.
+The baseline $f_2$ weighted metric is 0.845. Of the models tested, the highest performing model is XGBoost, with a mean of 0.945. This calculates to 4.76 standard deviations above the baseline.
 
 ### Model Performance
 - Summarize the performance of all models in a table:
