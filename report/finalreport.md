@@ -88,7 +88,7 @@ For this model, I have chosen to optimize for false negatives, since I have deci
 | | min_samples_leaf | 1, 2 |
 | | max_features | sqrt, log2 |
 
-#### Table 1: ML Models and their Corresponding Hyperparameters
+##### Table 1: ML Models and their Corresponding Hyperparameters
 
 ### Uncertainty Measurement
 Uncertainties due to data splitting can be measured by running different random states over the dataset during preprocessing and over the different ML models. 
@@ -103,20 +103,29 @@ In both cases, the evaluation metric (i.e. $f_2$ weighted) will vary between ran
 The baseline $f_2$ weighted metric is 0.845. Of the models tested, the highest performing model is XGBoost, with a mean of 0.945. This calculates to 4.76 standard deviations above the baseline.
 
 ### Model Performance
+![F2weightedscore](../figures/f2weightedbaseline.png)
+##### Figure 4. Different ML Models and Associated F2 Weighted Scores.
 - Summarize the performance of all models in a table:
 
-| Model               | Subset   | F2 Macro Score | F2 Weighted Score | Standard Deviation |
-|---------------------|----------|----------------|-------------------|--------------------|
-| SVC                 | Subset 1 | 0.8454         | 0.9640            | ±0.0123            |
-| Logistic Regression | Subset 1 | 0.6734         | 0.9235            | ±0.0156            |
-| XGBoost             | Full Set | 0.5502         | 0.9411            | ±0.0203            |
+| Model               | Subset   |   F2 Weighted Score | Standard Deviation |
+|---------------------|----------|--------------------|--------------------|
+| SVC                 | Subset 1 |          0.9640            | ±0.0123            |
+| Logistic Regression | Subset 1 |       0.9235            | ±0.0156            |
+| XGBoost             | Full Set |          0.9411            | ±0.0203            |
 
 ### Feature Importances
 
 #### Global Feature Importance
-- Report results from permutation importance, SHAP values, and XGBoost metrics.
-- Discuss which features were most and least important.
+Determining the most important features globally involved running multiple different global feature importances, including permutation importance, and XGBoost metrics. 
+Figure 5 shows the top 10 most important features from permutation feature importance. Using permutation feature importance, the difference in test score was calculated as a result of randomly
+shuffling a feature’s value. 
+![Permutation Importance](../figures/permutationimportance.png)
+##### Figure 5. Being female was the strongest feature by permutation feature importance, followed by Protein levels.
 
+Figure 6 shows the most important features according to the XGBoost metric weight, while Figure 7 shows the most important features according to the gain metric.
+
+![XGBoost Weight](../figures/xgboost_weight_importance.png)
+##### Figure 6. AST
 #### Local Feature Importance
 - Use SHAP force plots to explain individual predictions.
 - Highlight any surprising findings.
