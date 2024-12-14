@@ -19,10 +19,14 @@ This dataset came from a German research team, who used machine learning techniq
 
 ## Exploratory Data Analysis (EDA) 
 ![Sex Proportion](../figures/sexproportion.png)
+##### Figure 1. Male donors are more likely to have hepatitis.
 
 ![Albumin](../figures/albumin.png)
+##### Figure 2. Albumin, a protein made by the liver, is unsurprisingly linked to total protein levels.
 
 ![Bilirubin](../figures/bilirubin.png)
+##### Figure 3. Bilirubin levels are high in patients with cirrhosis. 
+
 ### Target Variable Distribution
 - Visualize the distribution of the target variable (`Category`).
 - Discuss any class imbalance observed.
@@ -117,42 +121,42 @@ The baseline $f_2$ weighted metric is 0.845. Of the models tested, the highest p
 
 #### Global Feature Importance
 Determining the most important features globally involved running multiple different global feature importances, including permutation importance, and XGBoost metrics. 
-Figure 5 shows the top 10 most important features from permutation feature importance. Using permutation feature importance, the difference in test score was calculated as a result of randomly
-shuffling a feature’s value. 
+
 ![Permutation Importance](../figures/permutationimportance.png)
 ##### Figure 5. Being female was the strongest feature by permutation feature importance, followed by Protein levels.
+
+Figure 5 shows the top 10 most important features from permutation feature importance. Using permutation feature importance, the difference in test score was calculated as a result of randomly
+shuffling a feature’s value. 
 
 Figure 6 shows the most important features according to the XGBoost metric weight, while Figure 7 shows the most important features according to the gain metric.
 
 ![XGBoost Weight](../figures/xgboost_weight_importance.png)
-##### Figure 6. AST
-#### Local Feature Importance
-- Use SHAP force plots to explain individual predictions.
-- Highlight any surprising findings.
+##### Figure 6. AST (Aspartate Aminotransferase) is the most important feature according to the XGBoost Weight metric.
+
+![XGBoost Gain](../figures/xgboost_gain_importance.png)
+##### Figure 7. CHE (Cholinesterase) is the most important feature according to the XGBoost Gain metric.
 
 ### Discussion
-- Interpret the results in the context of your problem.
-- Highlight any unexpected findings or limitations.
+While there are some contradictory signs of feature importance, there are a few main takeaways. 
+
+Consistently across various metrics, cholinesterase and aspartate aminotransferase rank highly. Aspartame aminotransferase is an enzyme indicating liver damage, so it is not surprising that it has a high impact on the models for predicting hepatitis, a liver disease. Cholinesterase is an enzyme involved in fat processing, which while not immediately clear how it is linked to liver health, points to its role in overall health.
+
+Age and albumin were found to have a low impact on the predictive power of ML models. These results are a bit surprising as age is correlated with disease progression for many chronic diseases, while albumin, a protein made by the liver that binds to free bilirubin, is generally thought of as important for reducing toxic bilirubin in the body. Further investigation is needed in this area.
 
 ## Outlook 
 
 ### Model Improvements
-- Suggest ways to improve your model:
-  - Collect more data to address class imbalance.
-  - Use advanced techniques like ensemble learning or neural networks.
+Moving forward, there are a few different ways to improve the model's predictive power. During the model training process, the `class_weight` hyperparameter was added to improve the convergence of the Reduced Features Model with Logistic Regression. Since the dataset is imbalanced, predictive power is likely to increase for the ML models once the weight of various classes are taken into account. Extensive feature engineering and feature selection could also boost predictive power by linking related features together.
 
 ### Interpretability Improvements
-- Discuss how interpretability could be enhanced:
-  - Use more advanced SHAP visualizations.
+SHAP is a key tool that was not successfully utilized in analyzing feature importance. Successful implementation of SHAP would improve the interpretability of both global and local feature importances. Local feature importance can also be addressed through the implementation of LIME metrics.
 
 ### Weaknesses in Approach
-- Acknowledge limitations:
-  - Small sample size for minority classes.
+A key limitation in the approach is the small sample size for minority classes. While this dataset comes with its limitations, more research should be done with more robust datasets to ensure that the small sample size does not skew the results too heavily.
 
 ## References (5 points)
 
 1. Lichtinghagen, Ralf, Frank Klawonn, and Georg Hoffmann. "HCV data." UCI Machine Learning Repository, 2020, https://doi.org/10.24432/C5D612.
 2. Hoffmann, Georg F. et al. “Using machine learning techniques to generate laboratory diagnostic pathways—a case study.” Journal of Laboratory and Precision Medicine (2018): n. pag.
-3. Pedregosa et al., "Scikit-learn: Machine Learning in Python," Journal of Machine Learning Research
-4. Lundberg et al., "A Unified Approach to Interpreting Model Predictions," Advances in Neural Information Processing Systems
+
 
