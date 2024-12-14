@@ -1,5 +1,11 @@
 # Blood Donor Classification Project Report
 
+### DSI at Brown University
+
+### Jimmy Lin
+
+### Github Repository: https://github.com/sirjimmylin/DATA-1030-Project.git
+
 ## Introduction 
 
 ### Motivation
@@ -9,10 +15,14 @@ Blood donor classification is crucial for healthcare systems to ensure the safet
 The dataset includes features such as Age, ALB, AST, and others, with the target variable being Category, which classifies individuals into groups like "0=Blood Donor" and "1=Hepatitis". The dataset consists of 615 samples and 12 features.
 
 ### Previous Work
-Previous studies have applied machine learning models to similar datasets, achieving F2 scores around 0.85 with Support Vector Classifiers. Our model aims to achieve similar predictive power.
+This dataset came from a German research team, who used machine learning techniques (specifically decision trees), to predict and confirm that laboratory tests can be useful for detecting liver fibrosis and cirrhosis. However, the team made it clear that medical experts are still necessary for determining decision trees for diagnoses. 
 
 ## Exploratory Data Analysis (EDA) 
+![Sex Proportion](../figures/sexproportion.png)
 
+![Albumin](../figures/albumin.png)
+
+![Bilirubin](../figures/bilirubin.png)
 ### Target Variable Distribution
 - Visualize the distribution of the target variable (`Category`).
 - Discuss any class imbalance observed.
@@ -29,7 +39,7 @@ Previous studies have applied machine learning models to similar datasets, achie
 - Report the percentage of missing values for each feature.
 - Describe how missing data was handled (e.g., imputation, reduced-features model).
 
-## Methods (10 points)
+## Methods 
 
 ### Splitting Strategy
 - Describe your data splitting strategy, such as stratified train-test split with cross-validation.
@@ -52,7 +62,7 @@ Previous studies have applied machine learning models to similar datasets, achie
 ### Uncertainty Measurement
 - Explain how uncertainties due to data splitting and non-deterministic methods were measured.
 
-## Results (15 points)
+## Results 
 
 ### Baseline Comparison
 - Report baseline scores (e.g., majority class F2 score).
@@ -81,7 +91,7 @@ Previous studies have applied machine learning models to similar datasets, achie
 - Interpret the results in the context of your problem.
 - Highlight any unexpected findings or limitations.
 
-## Outlook (5 points)
+## Outlook 
 
 ### Model Improvements
 - Suggest ways to improve your model:
@@ -98,7 +108,8 @@ Previous studies have applied machine learning models to similar datasets, achie
 
 ## References (5 points)
 
-1. Dataset source: HCV dataset from UCI Machine Learning Repository
-2. Pedregosa et al., "Scikit-learn: Machine Learning in Python," Journal of Machine Learning Research
-3. Lundberg et al., "A Unified Approach to Interpreting Model Predictions," Advances in Neural Information Processing Systems
+1. Lichtinghagen, Ralf, Frank Klawonn, and Georg Hoffmann. "HCV data." UCI Machine Learning Repository, 2020, https://doi.org/10.24432/C5D612.
+2. Hoffmann, Georg F. et al. “Using machine learning techniques to generate laboratory diagnostic pathways—a case study.” Journal of Laboratory and Precision Medicine (2018): n. pag.
+3. Pedregosa et al., "Scikit-learn: Machine Learning in Python," Journal of Machine Learning Research
+4. Lundberg et al., "A Unified Approach to Interpreting Model Predictions," Advances in Neural Information Processing Systems
 
