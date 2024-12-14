@@ -1,6 +1,6 @@
 # Blood Donor Classification Project Report
 
-### DSI at Brown University
+### Data Science Institute at Brown University
 
 ### Jimmy Lin
 
@@ -42,25 +42,45 @@ This dataset came from a German research team, who used machine learning techniq
 ## Methods 
 
 ### Splitting Strategy
-- Describe your data splitting strategy, such as stratified train-test split with cross-validation.
+Since the dataset is heavily imbalanced, it is important to ensure that the smaller classes are represented in each split.
+Employing a stratified splitting strategy ensures that the smaller classes will be present in each split. 
+
+The first split involved defining a custom `StratifiedSplit` function to split the data into the test set of data, and the remaining data was placed into an 'other' dataset.
+
+Following this split into a 'test' and 'other' set, I employed `StratifiedKFold` to split the 'other' set into training and validation sets. The function that I defined can be called so that you can input a custom number of splits or folds into the dataset. For this project, I set the number of splits equal to 4, the random state to 42, and the test size to 0.2. 
+
+The resulting split data is 60% train, 20% validation, and 20% test.
+
+
 
 ### Data Preprocessing
-- Explain preprocessing steps:
-  - Scaling continuous features using `StandardScaler`.
-  - Encoding categorical variables using `LabelEncoder`.
-  - Handling missing values appropriately.
+Once the data is split into train, test, and validation sets, the next step is to ensure that the data is preprocessed before running any machine learning models. For this project, a `ColumnTransformer` was used to preprocess the data. Categorical data were encoded using `LabelEncoder` , `OneHotEncoder`, while the preprocessing pipeline scaled continuous features using `StandardScaler` and the age feature using `MinMaxScaler`. 
+
 
 ### ML Pipeline
-- Detail your machine learning pipeline:
-  - Feature selection or dimensionality reduction techniques.
-  - Models tested: SVC, Logistic Regression, XGBoost, Random Forest.
-  - Hyperparameter tuning using `GridSearchCV`.
+Once the data is preprocessed, machine learning models can then be run on it. Four  models (Reduced Features Model with Logistic Regression, Reduced Features Model with Support Vector Classifier, XGBoost, and Random Forest Classifier) were implemented with GridSearchCV for hyperparameter tuning with cross-validation.
+
 
 ### Evaluation Metric
-- Justify your choice of metric (e.g., F2 score) and explain why it was chosen over other metrics.
+For this model, I have chosen to optimize for false negatives, since I have decided that missing a diagnosis for a patient that has hepatitis is greater than the cost associated with running extra tests and procedures. However, I do not want to completely ignore the costs associated with false positives, so I have decided that opting for an $f_2$ score serves as a way to weight recall more heavily, while not entirely discarding precision in my analysis. The dataset is also imbalanced, so a metric like accuracy does not make much sense. Moreover, this imbalance also means that it is best to find an averaging metric that takes the different weights into account, so I decided to use the weighted $f_2$ score.
+
+### Hyperparameter Tuning
+
+| Model                                     | Hyperparameter | Values       |
+|-------------------------------------------|----------------|--------------|
+| Reduced Features with SVC                 | Subset 1       | 0.8454       |  
+| Reduced Features with Logistic Regression | Subset 1       | 0.6734       |  
+| XGBoost                                   | Full Set       | 0.5502       |
+| Random Forest Classifier                  |                |              |
+
+
 
 ### Uncertainty Measurement
-- Explain how uncertainties due to data splitting and non-deterministic methods were measured.
+Uncertainties due to data splitting can be measured by running different random states over the dataset during preprocessing and over the different ML models. 
+
+Similarly, uncertainties due to non-deterministic methods (e.g. Random Forest) can be measured by training the model multiple times using different random seeds.
+
+In both cases, the evaluation metric (i.e. $f_2$ weighted) will vary between random states and random seeds. These differences constitute the uncertainties due to data splitting and non-deterministic methods.
 
 ## Results 
 
