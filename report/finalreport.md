@@ -9,32 +9,47 @@
 ## Introduction 
 
 ### Motivation
-Blood donor classification is crucial for healthcare systems to ensure the safety and efficiency of blood donation processes. Accurate classification models can help identify suitable donors and optimize resource allocation.
+Blood donor classification is crucial for healthcare systems to ensure the safety and efficiency of blood donation processes. Accurate classification models can help identify suitable donors and optimize resource allocation. This dataset addresses liver disease, specifically hepatitis. Utilizing machine learning models unlocks the potential for healthcare systems to predict whether a donor has a disease, such as hepatitis, by measuring the amount of various blood molecules present and using this data to project whether disease is present or not. 
 
 ### Dataset Description
-The dataset includes features such as Age, ALB, AST, and others, with the target variable being Category, which classifies individuals into groups like "0=Blood Donor" and "1=Hepatitis". The dataset consists of 615 samples and 12 features.
+The dataset includes features such as Age, ALB (albumin), AST (aspartame aminotransferase), and others, with the target variable being Category, which classifies individuals into classes like "0=Blood Donor" and "1=Hepatitis". Each class represents where each patient lies on the hepatitis progression spectrum. The dataset consists of 615 samples and 12 features.
 
 ### Previous Work
-This dataset came from a German research team, who used machine learning techniques (specifically decision trees), to predict and confirm that laboratory tests can be useful for detecting liver fibrosis and cirrhosis. However, the team made it clear that medical experts are still necessary for determining decision trees for diagnoses. 
+This dataset came from a German research team, who used machine learning techniques (specifically decision trees), to predict and confirm that laboratory tests can be useful for detecting liver fibrosis and cirrhosis. However, the team made it clear that medical experts are still necessary for determining decision trees for diagnoses. [2.]
 
 ## Exploratory Data Analysis (EDA) 
-![Sex Proportion](../figures/sexproportion.png)
-##### Figure 1. Male donors are more likely to have hepatitis.
-
-![Albumin](../figures/albumin.png)
-##### Figure 2. Albumin, a protein made by the liver, is unsurprisingly linked to total protein levels.
-
-![Bilirubin](../figures/bilirubin.png)
-##### Figure 3. Bilirubin levels are high in patients with cirrhosis. 
+This dataset consists of 615 rows, each of which represents an individual patient. There are also 14 columns, 12 of which are features, 1 is the target variable, and 1 which appears to be used for indexing.  
 
 ### Target Variable Distribution
-- Visualize the distribution of the target variable (`Category`).
-- Discuss any class imbalance observed.
+![Category](../figures/category.png)
+##### Figure 1. The dataset is heavily imbalanced, with most donors being healthy (represented by Category 0 = Blood Donor).
 
+From Figure 1, it can be seen that this multiclass classification problem is heavily imbalanced. The precise breakdown by category is given in Table 1. 
+
+| Category | Count |
+|----------|-------|
+| 0=Blood Donor | 533 |
+| 0s=suspect Blood Donor | 7 |
+| 1=Hepatitis | 24 |
+| 2=Fibrosis | 21 |
+| 3=Cirrhosis | 30 |
+
+##### Table 1. Number of Unique Categories in Categorical Features
 ### Feature Distributions
-- Include visualizations such as box plots or violin plots for key features grouped by `Category`.
-- Present histograms showing the distribution of continuous features.
+While plotting column pair plots with the `Category` target variable, a few interesting features stood out. 
+![Sex Proportion](../figures/sexproportion.png)
+##### Figure 2. Male donors are more likely to have hepatitis.
+As the only non-numerical feature, the sex variable provided the only way to compare a pair of categorical variables. In this dataset, the sex variable was binary, either male or female. 
 
+From Figure 2, it can ben seen that the prevalance of disease, while still far lower than the healthy population, is noticeably higher for men compared to women. 
+
+![Albumin](../figures/albumin.png)
+##### Figure 3. Albumin, a protein made by the liver, is unsurprisingly linked to total protein levels.
+Between two numerical variables, there is a strong positive correlation between albumin and total protein levels. Albumin is a protein that is made by the liver, which binds to free bilirubin molecules in the bloodstream. As a protein present in blood, it is not surprising that the total protein levels are positively correlated with albumin levels. 
+
+![Bilirubin](../figures/bilirubin.png)
+##### Figure 4. Bilirubin levels are high in patients with cirrhosis. 
+High levels of free bilirubin molecules in the bloodstream are linked to liver disease 
 ### Correlations
 - Calculate and visualize correlations between features using a heatmap.
 - Highlight any strongly correlated features that might impact modeling.
