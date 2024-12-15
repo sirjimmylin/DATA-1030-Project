@@ -18,8 +18,16 @@ For my project, I used the following Python and package versions:
 
 You can reproduce this environment using the Project YAML file provided here: [Project YAML](project.yml)
 
-### Notebook Organization and Dataset Citation
+### Folder Organization and Dataset Citation
 For the Jupyter Notebooks, navigate to the src folder. The baseline evaluation metric calculation and correlation plot is done in the projectbaseline.ipynb notebook, while the project.ipynb is the most up-to-date notebook for the rest of the data. oldproject.ipynb is a defunct notebook, although feel free to explore it for any insights.
+
+The raw dataset is found in the data folder, titled `hcvdat0.csv`. Preprocessed data is in the [preprocessed_data](data/preprocessed_data.pkl)
+
+Saved figures are in the figures folder.
+
+The final report is in the report folder.
+
+All results are stored in the results folder in .pkl files. Note that these files are only done AFTER hyperparameter tuning. The results of the ML models are not included before hyperparameter tuning as it simply serves as a benchmark of the progression of my project, not as results that should be stored.
 
 Here is the dataset citation: 
 Lichtinghagen, R., Klawonn, F., & Hoffmann, G. (2020). HCV data [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5D612.
