@@ -12,10 +12,10 @@
 Blood donor classification is crucial for healthcare systems to ensure the safety and efficiency of blood donation processes. Accurate classification models can help identify suitable donors and optimize resource allocation. This dataset addresses liver disease, specifically hepatitis. Utilizing machine learning models unlocks the potential for healthcare systems to predict whether a donor has a disease, such as hepatitis, by measuring the amount of various blood molecules present and using this data to project whether disease is present or not. 
 
 ### Dataset Description
-The dataset includes features such as Age, ALB (albumin), AST (aspartame aminotransferase), and others, with the target variable being Category, which classifies individuals into classes like "0=Blood Donor" and "1=Hepatitis". Each class represents where each patient lies on the hepatitis progression spectrum. The dataset consists of 615 samples and 12 features.
+The dataset includes features such as Age, ALB (albumin), AST (aspartame aminotransferase), and others, with the target variable being Category, which classifies individuals into classes like "0=Blood Donor" and "1=Hepatitis". Each class represents where each patient lies on the hepatitis progression spectrum. The dataset consists of 615 samples and 12 features. [1]
 
 ### Previous Work
-This dataset came from a German research team, who used machine learning techniques (specifically decision trees), to predict and confirm that laboratory tests can be useful for detecting liver fibrosis and cirrhosis. However, the team made it clear that medical experts are still necessary for determining decision trees for diagnoses. [2.]
+This dataset came from a German research team, who used machine learning techniques (specifically decision trees), to predict and confirm that laboratory tests can be useful for detecting liver fibrosis and cirrhosis. However, the team made it clear that medical experts are still necessary for determining decision trees for diagnoses. [2]
 
 ## Exploratory Data Analysis (EDA) 
 This dataset consists of 615 rows, each of which represents an individual patient. There are also 14 columns, 12 of which are features, 1 is the target variable, and 1 which appears to be used for indexing.  
@@ -45,18 +45,25 @@ From Figure 2, it can ben seen that the prevalance of disease, while still far l
 
 ![Albumin](../figures/albumin.png)
 ##### Figure 3. Albumin, a protein made by the liver, is unsurprisingly linked to total protein levels.
-Between two numerical variables, there is a strong positive correlation between albumin and total protein levels. Albumin is a protein that is made by the liver, which binds to free bilirubin molecules in the bloodstream. As a protein present in blood, it is not surprising that the total protein levels are positively correlated with albumin levels. 
+Between two numerical variables, there is a strong positive correlation between albumin and total protein levels. Albumin is a protein that is made by the liver, which binds to free bilirubin molecules in the bloodstream. As a protein present in blood, it is not surprising that the total protein levels are positively correlated with albumin levels. [3]
 
 ![Bilirubin](../figures/bilirubin.png)
 ##### Figure 4. Bilirubin levels are high in patients with cirrhosis. 
-High levels of free bilirubin molecules in the bloodstream are linked to liver disease 
-### Correlations
-- Calculate and visualize correlations between features using a heatmap.
-- Highlight any strongly correlated features that might impact modeling.
+High levels of free bilirubin molecules in the bloodstream are linked to liver disease. Free bilirubin molecules, if it builds up in the bloodstream to high levels, ends up being toxic. [3] Cirrhosis, the most advanced stage of hepatitis, being linked to high bilirubin levels aligns with this scientific consensus. Figure 4 shows a violin plot with cirrhosis patients conspicuously being much more likely to have high levels of bilirubin.
 
 ### Missing Data
-- Report the percentage of missing values for each feature.
-- Describe how missing data was handled (e.g., imputation, reduced-features model).
+Five features from this dataset had missing values, all of which were numeric features. Of the 615 rows of data, 26 had missing values. 
+
+| Feature | Fraction of Missing Values |
+|---------|--------|
+| ALB (Albumin) | 0.001626 |
+| ALP (Alkaline Phosphatase) | 0.029268 |
+| ALT (Alanine Aminotransferase) | 0.001626 |
+| CHOL (Cholesterol) | 0.016260 |
+| PROT (Total Protein) | 0.001626 |
+##### Table 2. Fraction of Missing Values per Feature.
+
+Since all of the missing data were from numeric features, there were some restrictions on the types of ML models that could be run. XGBoost and Reduced Feature Models were used during ML training to handle these restrictions.
 
 ## Methods 
 
@@ -81,7 +88,7 @@ Once the data is preprocessed, machine learning models can then be run on it. Fo
 
 
 ### Evaluation Metric
-For this model, I have chosen to optimize for false negatives, since I have decided that missing a diagnosis for a patient that has hepatitis is greater than the cost associated with running extra tests and procedures. However, I do not want to completely ignore the costs associated with false positives, so I have decided that opting for an $f_2$ score serves as a way to weight recall more heavily, while not entirely discarding precision in my analysis. The dataset is also imbalanced, so a metric like accuracy does not make much sense. Moreover, this imbalance also means that it is best to find an averaging metric that takes the different weights into account, so I decided to use the weighted $f_2$ score.
+For this model, I have chosen to optimize for false negatives, since I have decided that missing a diagnosis for a patient that has hepatitis is greater than the cost associated with running extra tests and procedures. However, I do not want to completely ignore the costs associated with false positives, so I have decided that opting for an f2 score serves as a way to weight recall more heavily, while not entirely discarding precision in my analysis. The dataset is also imbalanced, so a metric like accuracy does not make much sense. Moreover, this imbalance also means that it is best to find an averaging metric that takes the different weights into account, so I decided to use the weighted f2 score.
 
 ### Hyperparameter Tuning
 
@@ -107,30 +114,23 @@ For this model, I have chosen to optimize for false negatives, since I have deci
 | | min_samples_leaf | 1, 2 |
 | | max_features | sqrt, log2 |
 
-##### Table 1: ML Models and their Corresponding Hyperparameters
+##### Table 3: ML Models and their Corresponding Hyperparameters
 
 ### Uncertainty Measurement
 Uncertainties due to data splitting can be measured by running different random states over the dataset during preprocessing and over the different ML models. 
 
 Similarly, uncertainties due to non-deterministic methods (e.g. Random Forest) can be measured by training the model multiple times using different random seeds.
 
-In both cases, the evaluation metric (i.e. $f_2$ weighted) will vary between random states and random seeds. These differences constitute the uncertainties due to data splitting and non-deterministic methods.
+In both cases, the evaluation metric (i.e. f2 weighted) will vary between random states and random seeds. These differences constitute the uncertainties due to data splitting and non-deterministic methods.
 
 ## Results 
 
 ### Baseline Comparison
-The baseline $f_2$ weighted metric is 0.845. Of the models tested, the highest performing model is XGBoost, with a mean of 0.945. This calculates to 4.76 standard deviations above the baseline.
+The baseline f2 weighted metric is 0.845. Of the models tested, the highest performing model is XGBoost, with a mean of 0.945. This calculates to 4.76 standard deviations above the baseline.
 
 ### Model Performance
 ![F2weightedscore](../figures/f2weightedbaseline.png)
-##### Figure 4. Different ML Models and Associated F2 Weighted Scores.
-- Summarize the performance of all models in a table:
-
-| Model               | Subset   |   F2 Weighted Score | Standard Deviation |
-|---------------------|----------|--------------------|--------------------|
-| SVC                 | Subset 1 |          0.9640            | ±0.0123            |
-| Logistic Regression | Subset 1 |       0.9235            | ±0.0156            |
-| XGBoost             | Full Set |          0.9411            | ±0.0203            |
+##### Figure 5. Different ML Models and Associated F2 Weighted Scores.
 
 ### Feature Importances
 
@@ -138,18 +138,18 @@ The baseline $f_2$ weighted metric is 0.845. Of the models tested, the highest p
 Determining the most important features globally involved running multiple different global feature importances, including permutation importance, and XGBoost metrics. 
 
 ![Permutation Importance](../figures/permutationimportance.png)
-##### Figure 5. Being female was the strongest feature by permutation feature importance, followed by Protein levels.
+##### Figure 6. Being female was the strongest feature by permutation feature importance, followed by Protein levels.
 
-Figure 5 shows the top 10 most important features from permutation feature importance. Using permutation feature importance, the difference in test score was calculated as a result of randomly
+Figure 6 shows the top 10 most important features from permutation feature importance. Using permutation feature importance, the difference in test score was calculated as a result of randomly
 shuffling a feature’s value. 
 
-Figure 6 shows the most important features according to the XGBoost metric weight, while Figure 7 shows the most important features according to the gain metric.
+Figure 7 shows the most important features according to the XGBoost weight metric, while Figure 8 shows the most important features according to the gain metric.
 
 ![XGBoost Weight](../figures/xgboost_weight_importance.png)
-##### Figure 6. AST (Aspartate Aminotransferase) is the most important feature according to the XGBoost Weight metric.
+##### Figure 7. AST (Aspartate Aminotransferase) is the most important feature according to the XGBoost Weight metric.
 
 ![XGBoost Gain](../figures/xgboost_gain_importance.png)
-##### Figure 7. CHE (Cholinesterase) is the most important feature according to the XGBoost Gain metric.
+##### Figure 8. CHE (Cholinesterase) is the most important feature according to the XGBoost Gain metric.
 
 ### Discussion
 While there are some contradictory signs of feature importance, there are a few main takeaways. 
@@ -173,5 +173,6 @@ A key limitation in the approach is the small sample size for minority classes. 
 
 1. Lichtinghagen, Ralf, Frank Klawonn, and Georg Hoffmann. "HCV data." UCI Machine Learning Repository, 2020, https://doi.org/10.24432/C5D612.
 2. Hoffmann, Georg F. et al. “Using machine learning techniques to generate laboratory diagnostic pathways—a case study.” Journal of Laboratory and Precision Medicine (2018): n. pag.
+3. Zhang, Hui et al. “Correlation Between Total Bilirubin, Total Bilirubin/Albumin Ratio with Disease Activity in Patients with Rheumatoid Arthritis.” International journal of general medicine vol. 16 273-280. 24 Jan. 2023, doi:10.2147/IJGM.S393273
 
 

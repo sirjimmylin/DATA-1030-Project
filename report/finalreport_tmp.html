@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>finalreport.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="blood-donor-classification-project-report">Blood Donor Classification Project Report</h1>
+<h3 id="data-science-institute-at-brown-university">Data Science Institute at Brown University</h3>
+<h3 id="jimmy-lin">Jimmy Lin</h3>
+<h3 id="github-repository-httpsgithubcomsirjimmylindata-1030-projectgit">Github Repository: https://github.com/sirjimmylin/DATA-1030-Project.git</h3>
+<h2 id="introduction">Introduction</h2>
+<h3 id="motivation">Motivation</h3>
+<p>Blood donor classification is crucial for healthcare systems to ensure the safety and efficiency of blood donation processes. Accurate classification models can help identify suitable donors and optimize resource allocation. This dataset addresses liver disease, specifically hepatitis. Utilizing machine learning models unlocks the potential for healthcare systems to predict whether a donor has a disease, such as hepatitis, by measuring the amount of various blood molecules present and using this data to project whether disease is present or not.</p>
+<h3 id="dataset-description">Dataset Description</h3>
+<p>The dataset includes features such as Age, ALB (albumin), AST (aspartame aminotransferase), and others, with the target variable being Category, which classifies individuals into classes like &quot;0=Blood Donor&quot; and &quot;1=Hepatitis&quot;. Each class represents where each patient lies on the hepatitis progression spectrum. The dataset consists of 615 samples and 12 features. [1]</p>
+<h3 id="previous-work">Previous Work</h3>
+<p>This dataset came from a German research team, who used machine learning techniques (specifically decision trees), to predict and confirm that laboratory tests can be useful for detecting liver fibrosis and cirrhosis. However, the team made it clear that medical experts are still necessary for determining decision trees for diagnoses. [2]</p>
+<h2 id="exploratory-data-analysis-eda">Exploratory Data Analysis (EDA)</h2>
+<p>This dataset consists of 615 rows, each of which represents an individual patient. There are also 14 columns, 12 of which are features, 1 is the target variable, and 1 which appears to be used for indexing.</p>
+<h3 id="target-variable-distribution">Target Variable Distribution</h3>
+<p><img src="file:///Users/jimmylin/Documents/GitHub/DATA1030HW/DATA-1030-Project/figures/category.png" alt="Category"></p>
+<h5 id="figure-1-the-dataset-is-heavily-imbalanced-with-most-donors-being-healthy-represented-by-category-0--blood-donor">Figure 1. The dataset is heavily imbalanced, with most donors being healthy (represented by Category 0 = Blood Donor).</h5>
+<p>From Figure 1, it can be seen that this multiclass classification problem is heavily imbalanced. The precise breakdown by category is given in Table 1.</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0=Blood Donor</td>
+<td>533</td>
+</tr>
+<tr>
+<td>0s=suspect Blood Donor</td>
+<td>7</td>
+</tr>
+<tr>
+<td>1=Hepatitis</td>
+<td>24</td>
+</tr>
+<tr>
+<td>2=Fibrosis</td>
+<td>21</td>
+</tr>
+<tr>
+<td>3=Cirrhosis</td>
+<td>30</td>
+</tr>
+</tbody>
+</table>
+<h5 id="table-1-number-of-unique-categories-in-categorical-features">Table 1. Number of Unique Categories in Categorical Features</h5>
+<h3 id="feature-distributions">Feature Distributions</h3>
+<p>While plotting column pair plots with the <code>Category</code> target variable, a few interesting features stood out.
+<img src="file:///Users/jimmylin/Documents/GitHub/DATA1030HW/DATA-1030-Project/figures/sexproportion.png" alt="Sex Proportion"></p>
+<h5 id="figure-2-male-donors-are-more-likely-to-have-hepatitis">Figure 2. Male donors are more likely to have hepatitis.</h5>
+<p>As the only non-numerical feature, the sex variable provided the only way to compare a pair of categorical variables. In this dataset, the sex variable was binary, either male or female.</p>
+<p>From Figure 2, it can ben seen that the prevalance of disease, while still far lower than the healthy population, is noticeably higher for men compared to women.</p>
+<p><img src="file:///Users/jimmylin/Documents/GitHub/DATA1030HW/DATA-1030-Project/figures/albumin.png" alt="Albumin"></p>
+<h5 id="figure-3-albumin-a-protein-made-by-the-liver-is-unsurprisingly-linked-to-total-protein-levels">Figure 3. Albumin, a protein made by the liver, is unsurprisingly linked to total protein levels.</h5>
+<p>Between two numerical variables, there is a strong positive correlation between albumin and total protein levels. Albumin is a protein that is made by the liver, which binds to free bilirubin molecules in the bloodstream. As a protein present in blood, it is not surprising that the total protein levels are positively correlated with albumin levels. [3]</p>
+<p><img src="file:///Users/jimmylin/Documents/GitHub/DATA1030HW/DATA-1030-Project/figures/bilirubin.png" alt="Bilirubin"></p>
+<h5 id="figure-4-bilirubin-levels-are-high-in-patients-with-cirrhosis">Figure 4. Bilirubin levels are high in patients with cirrhosis.</h5>
+<p>High levels of free bilirubin molecules in the bloodstream are linked to liver disease. Free bilirubin molecules, if it builds up in the bloodstream to high levels, ends up being toxic. [3] Cirrhosis, the most advanced stage of hepatitis, being linked to high bilirubin levels aligns with this scientific consensus. Figure 4 shows a violin plot with cirrhosis patients conspicuously being much more likely to have high levels of bilirubin.</p>
+<h3 id="missing-data">Missing Data</h3>
+<p>Five features from this dataset had missing values, all of which were numeric features. Of the 615 rows of data, 26 had missing values.</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Fraction of Missing Values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ALB (Albumin)</td>
+<td>0.001626</td>
+</tr>
+<tr>
+<td>ALP (Alkaline Phosphatase)</td>
+<td>0.029268</td>
+</tr>
+<tr>
+<td>ALT (Alanine Aminotransferase)</td>
+<td>0.001626</td>
+</tr>
+<tr>
+<td>CHOL (Cholesterol)</td>
+<td>0.016260</td>
+</tr>
+<tr>
+<td>PROT (Total Protein)</td>
+<td>0.001626</td>
+</tr>
+</tbody>
+</table>
+<h5 id="table-2-fraction-of-missing-values-per-feature">Table 2. Fraction of Missing Values per Feature.</h5>
+<p>Since all of the missing data were from numeric features, there were some restrictions on the types of ML models that could be run. XGBoost and Reduced Feature Models were used during ML training to handle these restrictions.</p>
+<h2 id="methods">Methods</h2>
+<h3 id="splitting-strategy">Splitting Strategy</h3>
+<p>Since the dataset is heavily imbalanced, it is important to ensure that the smaller classes are represented in each split.
+Employing a stratified splitting strategy ensures that the smaller classes will be present in each split.</p>
+<p>The first split involved defining a custom <code>StratifiedSplit</code> function to split the data into the test set of data, and the remaining data was placed into an 'other' dataset.</p>
+<p>Following this split into a 'test' and 'other' set, I employed <code>StratifiedKFold</code> to split the 'other' set into training and validation sets. The function that I defined can be called so that you can input a custom number of splits or folds into the dataset. For this project, I set the number of splits equal to 4, the random state to 42, and the test size to 0.2.</p>
+<p>The resulting split data is 60% train, 20% validation, and 20% test.</p>
+<h3 id="data-preprocessing">Data Preprocessing</h3>
+<p>Once the data is split into train, test, and validation sets, the next step is to ensure that the data is preprocessed before running any machine learning models. For this project, a <code>ColumnTransformer</code> was used to preprocess the data. Categorical data were encoded using <code>LabelEncoder</code> , <code>OneHotEncoder</code>, while the preprocessing pipeline scaled continuous features using <code>StandardScaler</code> and the age feature using <code>MinMaxScaler</code>.</p>
+<h3 id="ml-pipeline">ML Pipeline</h3>
+<p>Once the data is preprocessed, machine learning models can then be run on it. Four  models (Reduced Features Model with Logistic Regression, Reduced Features Model with Support Vector Classifier, XGBoost, and Random Forest Classifier) were implemented with GridSearchCV for hyperparameter tuning with cross-validation.</p>
+<h3 id="evaluation-metric">Evaluation Metric</h3>
+<p>For this model, I have chosen to optimize for false negatives, since I have decided that missing a diagnosis for a patient that has hepatitis is greater than the cost associated with running extra tests and procedures. However, I do not want to completely ignore the costs associated with false positives, so I have decided that opting for an f2 score serves as a way to weight recall more heavily, while not entirely discarding precision in my analysis. The dataset is also imbalanced, so a metric like accuracy does not make much sense. Moreover, this imbalance also means that it is best to find an averaging metric that takes the different weights into account, so I decided to use the weighted f2 score.</p>
+<h3 id="hyperparameter-tuning">Hyperparameter Tuning</h3>
+<table>
+<thead>
+<tr>
+<th>Machine Learning Model</th>
+<th>Hyperparameter</th>
+<th>Values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reduced Features with SVC</td>
+<td>C</td>
+<td>0.1, 1, 10</td>
+</tr>
+<tr>
+<td></td>
+<td>gamma</td>
+<td>scale, auto</td>
+</tr>
+<tr>
+<td></td>
+<td>kernel</td>
+<td>linear</td>
+</tr>
+<tr>
+<td>Reduced Features with Logistic Regression</td>
+<td>C</td>
+<td>0.01, 1, 100</td>
+</tr>
+<tr>
+<td></td>
+<td>solver</td>
+<td>liblinear, saga</td>
+</tr>
+<tr>
+<td></td>
+<td>max_iter</td>
+<td>100000</td>
+</tr>
+<tr>
+<td></td>
+<td>class_weight</td>
+<td>balanced</td>
+</tr>
+<tr>
+<td></td>
+<td>penalty</td>
+<td>l1, l2</td>
+</tr>
+<tr>
+<td></td>
+<td>tol</td>
+<td>0.0001, 0.001</td>
+</tr>
+<tr>
+<td>XGBoost</td>
+<td>max_depth</td>
+<td>3, 5, 7</td>
+</tr>
+<tr>
+<td></td>
+<td>n_estimators</td>
+<td>100, 200</td>
+</tr>
+<tr>
+<td></td>
+<td>learning_rate</td>
+<td>0.01, 0.1</td>
+</tr>
+<tr>
+<td></td>
+<td>subsample</td>
+<td>0.8, 1.0</td>
+</tr>
+<tr>
+<td></td>
+<td>colsample_bytree</td>
+<td>0.8, 1.0</td>
+</tr>
+<tr>
+<td>Random Forest Classifier</td>
+<td>n_estimators</td>
+<td>100, 200</td>
+</tr>
+<tr>
+<td></td>
+<td>max_depth</td>
+<td>None, 10</td>
+</tr>
+<tr>
+<td></td>
+<td>min_samples_split</td>
+<td>2, 5</td>
+</tr>
+<tr>
+<td></td>
+<td>min_samples_leaf</td>
+<td>1, 2</td>
+</tr>
+<tr>
+<td></td>
+<td>max_features</td>
+<td>sqrt, log2</td>
+</tr>
+</tbody>
+</table>
+<h5 id="table-3-ml-models-and-their-corresponding-hyperparameters">Table 3: ML Models and their Corresponding Hyperparameters</h5>
+<h3 id="uncertainty-measurement">Uncertainty Measurement</h3>
+<p>Uncertainties due to data splitting can be measured by running different random states over the dataset during preprocessing and over the different ML models.</p>
+<p>Similarly, uncertainties due to non-deterministic methods (e.g. Random Forest) can be measured by training the model multiple times using different random seeds.</p>
+<p>In both cases, the evaluation metric (i.e. f2 weighted) will vary between random states and random seeds. These differences constitute the uncertainties due to data splitting and non-deterministic methods.</p>
+<h2 id="results">Results</h2>
+<h3 id="baseline-comparison">Baseline Comparison</h3>
+<p>The baseline f2 weighted metric is 0.845. Of the models tested, the highest performing model is XGBoost, with a mean of 0.945. This calculates to 4.76 standard deviations above the baseline.</p>
+<h3 id="model-performance">Model Performance</h3>
+<p><img src="file:///Users/jimmylin/Documents/GitHub/DATA1030HW/DATA-1030-Project/figures/f2weightedbaseline.png" alt="F2weightedscore"></p>
+<h5 id="figure-5-different-ml-models-and-associated-f2-weighted-scores">Figure 5. Different ML Models and Associated F2 Weighted Scores.</h5>
+<h3 id="feature-importances">Feature Importances</h3>
+<h4 id="global-feature-importance">Global Feature Importance</h4>
+<p>Determining the most important features globally involved running multiple different global feature importances, including permutation importance, and XGBoost metrics.</p>
+<p><img src="file:///Users/jimmylin/Documents/GitHub/DATA1030HW/DATA-1030-Project/figures/permutationimportance.png" alt="Permutation Importance"></p>
+<h5 id="figure-6-being-female-was-the-strongest-feature-by-permutation-feature-importance-followed-by-protein-levels">Figure 6. Being female was the strongest feature by permutation feature importance, followed by Protein levels.</h5>
+<p>Figure 6 shows the top 10 most important features from permutation feature importance. Using permutation feature importance, the difference in test score was calculated as a result of randomly
+shuffling a feature’s value.</p>
+<p>Figure 7 shows the most important features according to the XGBoost weight metric, while Figure 8 shows the most important features according to the gain metric.</p>
+<p><img src="file:///Users/jimmylin/Documents/GitHub/DATA1030HW/DATA-1030-Project/figures/xgboost_weight_importance.png" alt="XGBoost Weight"></p>
+<h5 id="figure-7-ast-aspartate-aminotransferase-is-the-most-important-feature-according-to-the-xgboost-weight-metric">Figure 7. AST (Aspartate Aminotransferase) is the most important feature according to the XGBoost Weight metric.</h5>
+<p><img src="file:///Users/jimmylin/Documents/GitHub/DATA1030HW/DATA-1030-Project/figures/xgboost_gain_importance.png" alt="XGBoost Gain"></p>
+<h5 id="figure-8-che-cholinesterase-is-the-most-important-feature-according-to-the-xgboost-gain-metric">Figure 8. CHE (Cholinesterase) is the most important feature according to the XGBoost Gain metric.</h5>
+<h3 id="discussion">Discussion</h3>
+<p>While there are some contradictory signs of feature importance, there are a few main takeaways.</p>
+<p>Consistently across various metrics, cholinesterase and aspartate aminotransferase rank highly. Aspartame aminotransferase is an enzyme indicating liver damage, so it is not surprising that it has a high impact on the models for predicting hepatitis, a liver disease. Cholinesterase is an enzyme involved in fat processing, which while not immediately clear how it is linked to liver health, points to its role in overall health.</p>
+<p>Age and albumin were found to have a low impact on the predictive power of ML models. These results are a bit surprising as age is correlated with disease progression for many chronic diseases, while albumin, a protein made by the liver that binds to free bilirubin, is generally thought of as important for reducing toxic bilirubin in the body. Further investigation is needed in this area.</p>
+<h2 id="outlook">Outlook</h2>
+<h3 id="model-improvements">Model Improvements</h3>
+<p>Moving forward, there are a few different ways to improve the model's predictive power. During the model training process, the <code>class_weight</code> hyperparameter was added to improve the convergence of the Reduced Features Model with Logistic Regression. Since the dataset is imbalanced, predictive power is likely to increase for the ML models once the weight of various classes are taken into account. Extensive feature engineering and feature selection could also boost predictive power by linking related features together.</p>
+<h3 id="interpretability-improvements">Interpretability Improvements</h3>
+<p>SHAP is a key tool that was not successfully utilized in analyzing feature importance. Successful implementation of SHAP would improve the interpretability of both global and local feature importances. Local feature importance can also be addressed through the implementation of LIME metrics.</p>
+<h3 id="weaknesses-in-approach">Weaknesses in Approach</h3>
+<p>A key limitation in the approach is the small sample size for minority classes. While this dataset comes with its limitations, more research should be done with more robust datasets to ensure that the small sample size does not skew the results too heavily.</p>
+<h2 id="references-5-points">References (5 points)</h2>
+<ol>
+<li>Lichtinghagen, Ralf, Frank Klawonn, and Georg Hoffmann. &quot;HCV data.&quot; UCI Machine Learning Repository, 2020, https://doi.org/10.24432/C5D612.</li>
+<li>Hoffmann, Georg F. et al. “Using machine learning techniques to generate laboratory diagnostic pathways—a case study.” Journal of Laboratory and Precision Medicine (2018): n. pag.</li>
+<li>Zhang, Hui et al. “Correlation Between Total Bilirubin, Total Bilirubin/Albumin Ratio with Disease Activity in Patients with Rheumatoid Arthritis.” International journal of general medicine vol. 16 273-280. 24 Jan. 2023, doi:10.2147/IJGM.S393273</li>
+</ol>
+
+</body>
+</html>
