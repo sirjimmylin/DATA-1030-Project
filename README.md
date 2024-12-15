@@ -1,5 +1,25 @@
-## DATA-1030-Project
-This is my in-class project for Data 1030. Feel free to check it out!
+# DATA 1030 Project
+## Project Overview
+This supervised machine learning project applies machine learning algorithms to a dataset of blood donors as well as their blood feature data. With this blood feature data, the project attempts to classify patients into one of a few different classes, each class representing a different stage of hepatitis. 
+
+### Python and Package Versions
+For my project, I used the following Python and package versions: 
+
+| Package    | Version |
+|------------|---------|
+| Python     | 3.12.7  |
+| numpy      | 1.26.4  |
+| matplotlib | 3.9.2   |
+| sklearn    | 1.5.1   |
+| pandas     | 2.2.2   |
+| xgboost    | 2.1.1   |
+| shap       | 0.45.1  |
+| plotly     | 5.23.0  |
+
+You can reproduce this environment using the Project YAML file provided here: [Project YAML](project.yml)
+
+### Notebook Organization and Dataset Citation
+For the Jupyter Notebooks, navigate to the src folder. The baseline evaluation metric calculation and correlation plot is done in the projectbaseline.ipynb notebook, while the project.ipynb is the most up-to-date notebook for the rest of the data. oldproject.ipynb is a defunct notebook, although feel free to explore it for any insights.
 
 Here is the dataset citation: 
 Lichtinghagen, R., Klawonn, F., & Hoffmann, G. (2020). HCV data [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5D612.
@@ -12,7 +32,7 @@ Additional Information
 The target attribute for classification is Category (blood donors vs. Hepatitis C, including its progress: 'just' Hepatitis C, Fibrosis, Cirrhosis).
 
 Has Missing Values?
-Yes 
+Yes
 
 ## Variables
 
