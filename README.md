@@ -1,4 +1,4 @@
-# DATA 1030 Project
+# Blood Donor Classification Project
 ## Project Overview
 This supervised machine learning project applies machine learning algorithms to a dataset of blood donors as well as their blood feature data. With this blood feature data, the project attempts to classify patients into one of a few different classes, each class representing a different stage of hepatitis. 
 
